@@ -8,6 +8,7 @@
 * Avoid negative searches with better indexes.
 * Avoid using SQL server cursor if possible.
 * When using SQL queries with SELECT, make sure to have the correct number of columns to avoid pulling off more data than needed.
+* Avoid using the keyword DISTINCT in SQL queries if possible. DISTINCT can cause extra operation which leads to the result of slowing all the queries down.
 
 2. As of writing data: 
 * Use CASE instead of UPDATE in SQL query since UPDATE writes longer than CASE due to its logging.
