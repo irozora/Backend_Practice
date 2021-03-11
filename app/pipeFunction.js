@@ -53,26 +53,34 @@ function pipe(arg1, ...func) {
         case "object":
             let init;
 
-            if (!arg1.isArray) {
-                // if arg1 is an object
+            // if arg1 is strictly equal to null, set the string "null" as its initial value.
+            if (arg1 === null) {
+                init = 'null';
+            } else if (!arg1.isArray) {
+                // if arg1 is not an array
                 for (const key in arg1) {
                     if (typeof init === "undefined") {
-                        init = arg1[key]
+                    init = arg1[key]
                     } else {
-                        init += arg1[key];
+                    init += arg1[key];
                     }
                 }
             } else {
                 // if arg1 is an array
                 for (const i of arg1) {
                     if (typeof init === "undefined") {
-                        init = arg1[i]
+                    init = arg1[i]
                     } else {
-                        init += arg1[i];
+                    init += arg1[i];
                     }
                 }
             }
             initialValue = [init, ...func];
+            break;
+
+        // if the data type is undefined, set the string "undefined" as its initial value.
+        case "undefined":
+            initialValue = ["undefined", ...func];
             break;
     }
     result = initialValue.reduce((acc, cur) => acc + cur());

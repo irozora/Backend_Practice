@@ -13,19 +13,19 @@ const {
 
 // Unit test for exercise 1 - add comma to number and return string
 describe('Add comma to number', () => {
-    it('Marks comma per every three digits and the result type should be string', () => {
+    it('Marks comma per every three digits to a negative floating number', () => {
         let result = addComma.numToString(-489412.4981);
         assert.strictEqual(result, '-489,412.4981');
         assert.typeOf(result, 'string');
     });
 
-    it('Marks comma per every three digits and the result type should be string', () => {
+    it('Marks comma per every three digits to an integer', () => {
         let result = addComma.numToString(115485132);
         assert.strictEqual(result, '115,485,132');
         assert.typeOf(result, 'string');
     });
 
-    it('Marks comma per every three digits and the result type should be string', () => {
+    it('Marks comma per every three digits to a floating number', () => {
         let result = addComma.numToString(.99999);
         assert.strictEqual(result, '0.99999');
         assert.typeOf(result, 'string');
@@ -59,4 +59,16 @@ describe('Pipe function with a base variable and indefinite function parameter',
         let result = pipe([12, 888, "qwer"], addOne, addOne, addTwo);
         assert.strictEqual(result, '900qwer112');
     });
+
+    it('Should still add numbers to an undefined variable', () => {
+        let variable1;
+        let result = pipe(variable1, addOne, addOne, addTwo);
+        assert.strictEqual(result, 'undefined112');
+    });
+
+    it('Should still add numbers to null', () => {
+        let result = pipe(null, addGibberish, addTwo, addOne, addTwo, addString);
+        assert.strictEqual(result, 'nullgibberish212addRandomStr');
+    });
+
 })
